@@ -86,8 +86,8 @@ void keyPressed() {
       song.play();
       pattern.play();
     } else {
-      playTimer.reset();
       song.pause();
+      gameReset();
     }
   }
   if (playing) {
