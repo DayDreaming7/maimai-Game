@@ -32,6 +32,7 @@ String[] btnText = {"echo", "ghost rule", "nightsky", "Go", "^", "v"};
 color[] btnTextColor = {#000000, #000000, #000000, #04B42B, #000000, #000000};
 
 int emptyCoverTextSize = 60;
+int speedStringSize = 40;
 
 void scene1Initialize() {
   scene1SongCover1 = loadImage("echo.png");
@@ -100,7 +101,10 @@ void scene1Update() {
   stroke(0);
   strokeWeight(3);
   rect(speedRX, speedRY, speedRW, speedRH);
-  text(nf(tapDefSpeed, 0, 0), speedRX, speedRY - btnSeparate/2);
+  textSize(speedStringSize);
+  text("Speed:", speedRX - speedRW/5, speedRY - speedRH/5*2);
+  textSize(emptyCoverTextSize);
+  text(nf(tapDefSpeed, 0, 0), speedRX, speedRY - btnSeparate/4);
   noStroke();
 
   switch(selectedSongNo) {

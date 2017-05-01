@@ -25,6 +25,7 @@ void fullReset(){
   combo = 0;
   bestCombo = 0;
   tapCount = 0;
+  selectedSongNo = 0;
   playTimer.reset();
   pattern.stop();
 
