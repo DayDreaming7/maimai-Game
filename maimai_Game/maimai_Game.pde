@@ -7,7 +7,9 @@ import arb.soundcipher.*;
 //Sounds
 Minim minim;
 AudioPlayer song;
-String songName = "echo";
+String song1Name = "echo";
+String song2Name = "ghost_rule";
+String song3Name = "nightsky";
 float songVolGain = -5.0;
 AudioSample tapSound;
 String tapSoundName = "tap";
@@ -20,6 +22,7 @@ SCScore pattern;
 ArrayList <Tap> taps;
 ArrayList <HitPoint> hitPoints;
 ArrayList <StartPoint> startPoints;
+ArrayList <Button> buttons;
 
 //Shapes
 PShape psTap;
@@ -39,7 +42,12 @@ float soundTimeBuffer = 3;
 int tapCount = 0;
 int movingTime;
 
+//keys
 boolean keyDown[] = {false, false, false, false, false, false, false, false};
+
+//Scene
+int scene = 0;
+
 
 //----------------------------------------------------------------------------
 void setup() {
@@ -50,17 +58,18 @@ void setup() {
   ellipseMode(RADIUS);
   shapeMode(CENTER);
   textAlign(CENTER, CENTER);
+  imageMode(CENTER);
+  rectMode(CENTER);
   frameRate(60);
 
   taps = new ArrayList();
   hitPoints = new ArrayList();
   startPoints = new ArrayList();
+  buttons = new ArrayList();
 
   minim = new Minim(this);
-  song = minim.loadFile(songName + ".mp3");
   tapSound = minim.loadSample(tapSoundName + ".mp3", 512);
-  song.setGain(songVolGain);
-  tapSound.setGain(tapSoundVolGain);
+  tapSound.setGain(tapSoundVolGain);  
 
   pattern = new SCScore();
   pattern.addCallbackListener(this);
@@ -68,60 +77,84 @@ void setup() {
 
   playTimer = new Stopwatch(this);
 
-  initializeAll(); //Size, Shapes, HitPoints of mainRing
+  scene0Initialize();
+
+  //initializeAll(); //Size, Shapes, HitPoints of mainRing
 }
 
 void draw() {
-  background(bgColor);
-  update();
+  if (scene == 0) {
+    background(scene0BgColorR, scene0BgColorG, scene0BgColorB);
+    scene0Update();
+  } else if (scene == 1) {
+    background(scene1BgColorR, scene1BgColorG, scene1BgColorB);
+    scene1Update();
+  } else if (scene == 2) {
+    background(bgColor);
+    scene2Update();
+  }
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    playing = !playing;
-
-    if (playing) {
-      song.rewind();
-      playTimer.start();
-      song.play();
-      pattern.play();
-    } else {
-      song.pause();
-      gameReset();
-    }
+  if (scene == 0){
+    scene1Initialize();
+    scene = 1;
   }
-  if (playing) {
-    if (key == '9') {
-      keyDown[0] = true;
-      println("P0 down");
+  // if (scene == 1){
+
+  // }
+  if (scene == 2) {
+    if (key == ' ') {
+      playing = !playing;
+
+      if (playing) {
+        song.rewind();
+        playTimer.start();
+        song.play();
+        pattern.play();
+      } else {
+        song.pause();
+        songReset();
+      }
     }
-    if (key == 'o'|| key == 'O') {
-      keyDown[1] = true;
-      println("P1 down");
+    if (playing) {
+      if (key == '9') {
+        keyDown[0] = true;
+        //println("P0 down");
+      }
+      if (key == 'o'|| key == 'O') {
+        keyDown[1] = true;
+        //println("P1 down");
+      }
+      if (key == 'l'|| key == 'L') {
+        keyDown[2] = true;
+        //println("P2 down");
+      }
+      if (key == ',') {
+        keyDown[3] = true;
+        //println("P3 down");
+      }
+      if (key == 'm'|| key == 'M') {
+        keyDown[4] = true;
+        //println("P4 down");
+      } 
+      if (key == 'j' || key == 'J') {
+        keyDown[5] = true;
+        //println("P5 down");
+      }
+      if (key == 'u' || key == 'U') {
+        keyDown[6] = true;
+        //println("P6 down");
+      }
+      if (key == '8') {
+        keyDown[7] = true;
+        //println("P7 down");
+      }
     }
-    if (key == 'l'|| key == 'L') {
-      keyDown[2] = true;
-      println("P2 down");
-    }
-    if (key == ',') {
-      keyDown[3] = true;
-      println("P3 down");
-    }
-    if (key == 'm'|| key == 'M') {
-      keyDown[4] = true;
-      println("P4 down");
-    } 
-    if (key == 'j' || key == 'J') {
-      keyDown[5] = true;
-      println("P5 down");
-    }
-    if (key == 'u' || key == 'U') {
-      keyDown[6] = true;
-      println("P6 down");
-    }
-    if (key == '8') {
-      keyDown[7] = true;
-      println("P7 down");
+    if(key == 'x' || key == 'X'){
+      song.pause();
+      fullReset();
+      scene = 0;
     }
   }
 }

@@ -1,4 +1,4 @@
-void update() {
+void scene2Update() {
   updateMainRing();
   displayAllTabs();
 

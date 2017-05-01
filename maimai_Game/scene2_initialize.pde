@@ -1,9 +1,10 @@
-void initializeAll() {
+void scene2_initializeAll() {
   initSizeValue();
   initAllShape();
   initHitPoints();
   initStartPoints();
 
+  initSongs();
   initPatterns();
 
   initTextPos();
@@ -48,12 +49,12 @@ float hitMarkTextShowTime = 20.0;
 int combo = 0;
 int bestCombo = 0;
 int totalScore = 0;
-
 int scoreP = 500;
 int scoreG = 400;
 int scoreD = 250;
 int scoreM = 0;
 
+//----------------------------------------------------------------------------
 void initSizeValue() {
   centreX = displayWidth/2;
   centreY = displayHeight/2;
@@ -162,12 +163,33 @@ void initStartPoints() {
   }
 }
 
+void initSongs(){
+  if(selectedSongNo == 1){
+    song = minim.loadFile(song1Name + ".mp3");
+    song.setGain(songVolGain);
+  } else if(selectedSongNo == 2){
+    song = minim.loadFile(song2Name + ".mp3");
+    song.setGain(songVolGain);
+  } else if(selectedSongNo == 3){
+    song = minim.loadFile(song3Name + ".mp3");
+    song.setGain(songVolGain);
+  }
+}
+
 void initPatterns() {
-  println(int(getDisBtwPoints(startPoints.get(0).x, startPoints.get(0).y, hitPoints.get(0).x, hitPoints.get(0).y)/(tapDefSpeed/1000*60)));
 
   movingTime = int(getDisBtwPoints(startPoints.get(0).x, startPoints.get(0).y, hitPoints.get(0).x, hitPoints.get(0).y)/(tapDefSpeed/1000*60)); //tapDefSpeed / frameRate
 
-  String[] temp = loadStrings("echo.txt");
+  String selectedSongName = "";
+  if(selectedSongNo == 1){
+    selectedSongName = song1Name;
+  } else if(selectedSongNo == 2){
+    selectedSongName = song2Name;
+  } else if(selectedSongNo == 3){
+    selectedSongName = song3Name;
+  }
+   String[] temp = loadStrings(selectedSongName + ".txt");
+  
   for (int i = 0; i < temp.length; i++) {
     float tempSplit[] = float(split(temp[i], "/"));
 

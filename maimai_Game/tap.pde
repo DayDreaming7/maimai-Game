@@ -106,7 +106,7 @@ class Tap {
       } else if (getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) <= detectR4 && getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) > detectR3 && keyDown[pos - 1]) {
         hitMarkText[pos-1][2] = 4.0;
         hitMarkText[pos-1][3] = hitMarkTextShowTime;
-        println(pos + " " + "Miss");
+        //println(pos + " " + "Miss");
         totalScore += scoreM;
         bestCombo = max(bestCombo, combo);
         combo = 0;
@@ -114,7 +114,7 @@ class Tap {
       } else if (x > width || x < 0 || y > height || y < 0) {
         hitMarkText[pos-1][2] = 4.0;
         hitMarkText[pos-1][3] = hitMarkTextShowTime;
-        println(pos + " " + "Miss");
+        //println(pos + " " + "Miss");
         totalScore += scoreM;
         bestCombo = max(bestCombo, combo);
         combo = 0;
