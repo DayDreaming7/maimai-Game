@@ -18,9 +18,11 @@ void songReset() {
   for (Tap temp : taps) {
     temp.reinitialize();
   }
+  playing = false;
 }
 
 void fullReset(){
+  // println("reseting");
   totalScore = 0;
   combo = 0;
   bestCombo = 0;
@@ -28,23 +30,38 @@ void fullReset(){
   selectedSongNo = 0;
   playTimer.reset();
   pattern.stop();
+  pattern.empty();
+  playing = false;
 
-  println(taps.size());
-  println(hitPoints.size());
-  println(startPoints.size());
-  println(buttons.size());
-  println("^");
+  // println(taps.size());
+  // println(hitPoints.size());
+  // println(startPoints.size());
+  // println(buttons.size());
+  // println("^");
 
-  taps.clear();
-  hitPoints.clear();
-  startPoints.clear();
-  buttons.clear();
+  for(int i = taps.size()-1; i >= 0; i--){
+    taps.remove(i);
+  }
+  for(int i = hitPoints.size()-1; i >= 0; i--){
+    hitPoints.remove(i);
+  }
+  for(int i = startPoints.size()-1; i >= 0; i--){
+    startPoints.remove(i);
+  }
+  for(int i = buttons.size()-1; i >= 0; i--){
+    buttons.remove(i);
+  }
 
-  println(taps.size());
-  println(hitPoints.size());
-  println(startPoints.size());
-  println(buttons.size());
-  println("v");
+  // taps.clear();
+  // hitPoints.clear();
+  // startPoints.clear();
+  // buttons.clear();
+
+  // println(taps.size());
+  // println(hitPoints.size());
+  // println(startPoints.size());
+  // println(buttons.size());
+  // println("v");
 }
 
 class Button {

@@ -108,6 +108,7 @@ void keyPressed() {
       playing = !playing;
 
       if (playing) {
+        // println("DEBUG: " + taps.size());
         song.rewind();
         playTimer.start();
         song.play();
@@ -193,6 +194,7 @@ void handleCallbacks(int callbackID) {
   //   tapSound.trigger();
   // }
   if (callbackID == 1) {
+    // println("tapCount: " + tapCount);
     taps.get(tapCount).visible = true;
     tapCount++;
   }
