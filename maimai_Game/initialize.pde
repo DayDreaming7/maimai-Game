@@ -181,7 +181,7 @@ void initPatterns() {
 }
 
 void initTextPos() {
-  for(int i = 0; i <= 7; i++){
+  for (int i = 0; i <= 7; i++) {
     float alpha = 0;
     int xDirection = 1;
     int yDirection = 1;

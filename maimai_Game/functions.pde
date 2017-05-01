@@ -8,10 +8,14 @@ float getDisBtwPoints(float tx1, float ty1, float tx2, float ty2) {
   return distance;
 }
 
-void gameReset(){
+void gameReset() {
   totalScore = 0;
   combo = 0;
   bestCombo = 0;
+  tapCount = 0;
   playTimer.reset();
   pattern.stop();
+  for (Tap temp : taps) {
+    temp.reinitialize();
+  }
 }

@@ -1,4 +1,5 @@
 class Tap {
+  float initX, initY;
   float x, y;
   float speed;
   int pos;
@@ -11,9 +12,11 @@ class Tap {
   float detectR1 = tapInnerR / 4;
   float detectR2 = tapInnerR / 2.5;
   float detectR3 = tapInnerR / 1;
-  float detectR4 = tapInnerR + 20;
+  float detectR4 = tapInnerR + 10;
 
   Tap(float tx, float ty, float ts, int tp, float tdp) {
+    initX = tx;
+    initY = ty;
     x = tx;
     y = ty;
     speed = ts;
@@ -93,24 +96,22 @@ class Tap {
         totalScore += scoreG;
         combo++;
         visible = false;
-      } else if (getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) <= detectR3 && getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) > detectR2 && keyDown[pos - 1]){
+      } else if (getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) <= detectR3 && getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) > detectR2 && keyDown[pos - 1]) {
         hitMarkText[pos-1][2] = 3.0;
         hitMarkText[pos-1][3] = hitMarkTextShowTime;
         tapSound.trigger();
         totalScore += scoreD;
         combo++;
         visible = false;
-      } 
-      //else if (getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) <= detectR4 && getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) > detectR3 && keyDown[pos - 1]){
-      //   hitMarkText[pos-1][2] = 4.0;
-      //   hitMarkText[pos-1][3] = hitMarkTextShowTime;
-      //   println(pos + " " + "Miss");
-      //   totalScore += scoreM;
-      //   bestCombo = max(bestCombo, combo);
-      //   combo = 0;
-      //   visible = false;
-      // } 
-      else if (x > width || x < 0 || y > height || y < 0) {
+      } else if (getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) <= detectR4 && getDisBtwPoints(x, y, hitPoints.get(pos-1).x, hitPoints.get(pos-1).y) > detectR3 && keyDown[pos - 1]) {
+        hitMarkText[pos-1][2] = 4.0;
+        hitMarkText[pos-1][3] = hitMarkTextShowTime;
+        println(pos + " " + "Miss");
+        totalScore += scoreM;
+        bestCombo = max(bestCombo, combo);
+        combo = 0;
+        visible = false;
+      } else if (x > width || x < 0 || y > height || y < 0) {
         hitMarkText[pos-1][2] = 4.0;
         hitMarkText[pos-1][3] = hitMarkTextShowTime;
         println(pos + " " + "Miss");
@@ -120,6 +121,12 @@ class Tap {
         visible = false;
       }
     }
+  }
+
+  void reinitialize() {
+    x = initX;
+    y = initY;
+    visible = false;
   }
 }
 
