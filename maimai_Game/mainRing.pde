@@ -14,9 +14,9 @@ void drawMainRing() {
   //   temp.display();
   // }
 
-  for (StartPoint temp : startPoints) {
-    temp.display();
-  }
+  //for (StartPoint temp : startPoints) {
+    //temp.display();
+  //}
 }
 
 void drawHitMarkText() {

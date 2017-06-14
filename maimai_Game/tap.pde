@@ -9,10 +9,17 @@ class Tap {
   int yDirection = 1;
   boolean visible = false;
 
-  float detectR1 = tapInnerR / 4;
-  float detectR2 = tapInnerR / 2.5;
-  float detectR3 = tapInnerR / 1;
-  float detectR4 = tapInnerR + 10;
+  // For Mac
+  float detectR1 = tapInnerR/3;
+  float detectR2 = tapInnerR/1.5;
+  float detectR3 = tapInnerR + 15;
+  float detectR4 = tapInnerR + 25;
+
+  // For Windows
+  // float detectR1 = tapInnerR / 4;
+  // float detectR2 = tapInnerR / 2.5;
+  // float detectR3 = tapInnerR / 1;
+  // float detectR4 = tapInnerR + 10;
 
   Tap(float tx, float ty, float ts, int tp, float tdp) {
     initX = tx;

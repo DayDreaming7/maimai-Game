@@ -18,7 +18,7 @@ void scene0Initialize(){
 }
 
 void scene0Update() {
-    if(scene0BgColorG > 209 || scene0BgColorG < 130){
+    if(scene0BgColorG > 230 || scene0BgColorG < 160){
         scene0BgColorGChange *= -1;
     }
     if(scene0BgColorGTimer <= 0){

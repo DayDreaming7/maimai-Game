@@ -31,8 +31,8 @@ color btnClickColor = #5DD1D6;
 String[] btnText = {"echo", "ghost rule", "nightsky", "Go", "^", "v"};
 color[] btnTextColor = {#000000, #000000, #000000, #04B42B, #000000, #000000};
 
-int emptyCoverTextSize = 60;
-int speedStringSize = 40;
+int emptyCoverTextSize = 55;
+int speedStringSize = 28;
 
 void scene1Initialize() {
   scene1SongCover1 = loadImage("echo.png");
@@ -83,7 +83,7 @@ void scene1Initialize() {
 }
 
 void scene1Update() {
-  if (scene1BgColorG > 209 || scene1BgColorG < 130) {
+  if (scene1BgColorG > 230 || scene1BgColorG < 160) {
     scene1BgColorGChange *= -1;
   }
   if (scene1BgColorGTimer <= 0) {

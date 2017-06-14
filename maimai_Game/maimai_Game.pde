@@ -8,6 +8,7 @@ import arb.soundcipher.*;
 Minim minim;
 AudioPlayer song;
 String song1Name = "echo";
+
 String song2Name = "ghost_rule";
 String song3Name = "nightsky";
 float songVolGain = -5.0;
@@ -96,7 +97,7 @@ void draw() {
 }
 
 void keyPressed() {
-  if (scene == 0){
+  if (scene == 0) {
     scene1Initialize();
     scene = 1;
   }
@@ -152,7 +153,7 @@ void keyPressed() {
         //println("P7 down");
       }
     }
-    if(key == 'x' || key == 'X'){
+    if (key == 'x' || key == 'X') {
       song.pause();
       fullReset();
       scene = 0;
@@ -186,6 +187,38 @@ void keyReleased() {
     if (key == '8') {
       keyDown[7] = false;
     }
+  }
+}
+
+void mousePressed() {
+  if (scene == 2) {
+    println(hitPoints.size());
+    int hitPointX, hitPointY;
+    float[] distance = new float[8];
+    float min = 0;
+    byte triggeredPos = 0;
+
+    for (int i = 0; i <= 7; i++) {
+      distance[i] = getDisBtwPoints(mouseX, mouseY, hitPoints.get(i).x, hitPoints.get(i).y);
+      if (i == 0) {
+        min = distance[0];
+        triggeredPos = 0;
+      } 
+      if (distance[i] < min) {
+        min = distance[i];
+        triggeredPos = byte(i);
+      }
+    }
+
+    if (distance[triggeredPos]< tapInnerR + 30) {
+      keyDown[triggeredPos] = true;
+    }
+  }
+}
+
+void mouseReleased() {
+  for(int i = 0; i <= 7; i++){
+    keyDown[i] = false;
   }
 }
 
