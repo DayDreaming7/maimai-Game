@@ -20,6 +20,7 @@ void drawMainRing() {
 }
 
 void drawHitMarkText() {
+  fill(255);
   textSize(40);
   for (int i = 0; i <= 7; i++) {
     if (hitMarkText[i][2] == 1.0 && hitMarkText[i][3] > 0) {
@@ -39,6 +40,7 @@ void drawHitMarkText() {
 }
 
 void drawComboText() {
+  fill(255);
   textSize(80);
   text(totalScore, width/2, height/2 - 50);
   textSize(60);

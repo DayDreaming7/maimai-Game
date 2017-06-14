@@ -192,7 +192,6 @@ void keyReleased() {
 
 void mousePressed() {
   if (scene == 2) {
-    println(hitPoints.size());
     int hitPointX, hitPointY;
     float[] distance = new float[8];
     float min = 0;
